@@ -4,6 +4,7 @@ import { UnitSheetComponent } from '../unit-sheet/unit-sheet.component';
 
 @Component({
   selector: 'app-roster',
+  standalone: true,
   imports: [CommonModule, UnitSheetComponent],
   templateUrl: './roster.component.html',
   styleUrl: './roster.component.css'

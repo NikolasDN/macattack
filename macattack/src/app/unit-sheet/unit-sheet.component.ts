@@ -1,4 +1,5 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Module } from '../interfaces/module';
 import { Weapon } from '../interfaces/weapon';
 import { Hardware } from '../interfaces/hardware';
@@ -7,7 +8,8 @@ import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 
 @Component({
   selector: 'app-unit-sheet',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './unit-sheet.component.html',
   styleUrl: './unit-sheet.component.css'
 })
@@ -82,6 +84,46 @@ export class UnitSheetComponent {
     class: 1,
     modules: [],
     commander: true,
+  }
+
+  isMAC(unit: MAC | AuxiliaryUnit): unit is MAC {
+    return 'class' in unit;
+  }
+
+  isClass(unit: MAC | AuxiliaryUnit, classNum: number): boolean {
+    return this.isMAC(unit) && unit.class === classNum;
+  }
+
+  isAuxiliaryType(unit: MAC | AuxiliaryUnit, type: 'infantry' | 'vehicle'): boolean {
+    return !this.isMAC(unit) && unit.type === type;
+  }
+
+  selectUnitType(type: string) {
+    if (type.startsWith('Class')) {
+      const classNum = parseInt(type.split(' ')[1]);
+      this.unit = {
+        ...this.unit,
+        class: classNum as 1 | 2 | 3,
+        modules: [],
+        commander: true
+      };
+    } else if (type === 'Infantry AU') {
+      this.unit = {
+        name: this.unit.name,
+        type: 'infantry',
+        formationSize: 1,
+        weapons: [],
+        hardware: []
+      };
+    } else if (type === 'Vehicle AU') {
+      this.unit = {
+        name: this.unit.name,
+        type: 'vehicle',
+        formationSize: 1,
+        weapons: [],
+        hardware: []
+      };
+    }
   }
 
   getCost(unit: MAC | AuxiliaryUnit): number {

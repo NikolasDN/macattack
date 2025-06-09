@@ -1,0 +1,8 @@
+.selected {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+td[style*="cursor: pointer"]:hover {
+    background-color: #f0f0f0;
+}

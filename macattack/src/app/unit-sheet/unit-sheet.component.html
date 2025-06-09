@@ -14,28 +14,28 @@
     </tr>
     <tr style="height: 24px">
         <td class="s1"></td>
-        <td class="s2" dir="ltr">Class 1 MAC</td>
+        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 1)" (click)="selectUnitType('Class 1 MAC')" style="cursor: pointer; user-select: none;">Class 1 MAC</td>
         <td class="s1"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s3"></td>
-        <td class="s4" dir="ltr">Class 2 MAC</td>
+        <td class="s4" dir="ltr" [class.selected]="isClass(unit, 2)" (click)="selectUnitType('Class 2 MAC')" style="cursor: pointer; user-select: none;">Class 2 MAC</td>
         <td class="s1"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1"></td>
-        <td class="s2" dir="ltr">Class 3 MAC</td>
+        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 3)" (click)="selectUnitType('Class 3 MAC')" style="cursor: pointer; user-select: none;">Class 3 MAC</td>
         <td class="s1"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1"></td>
-        <td class="s2" dir="ltr">Infantry AU</td>
-        <td class="s5"></td>
+        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'infantry')" (click)="selectUnitType('Infantry AU')" style="cursor: pointer; user-select: none;">Infantry AU</td>
+        <td class="s5" class="selected"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1"></td>
-        <td class="s2" dir="ltr">Vehicle AU</td>
-        <td class="s5"></td>
+        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'vehicle')" (click)="selectUnitType('Vehicle AU')" style="cursor: pointer; user-select: none;">Vehicle AU</td>
+        <td class="s5" class="selected"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1"></td>
