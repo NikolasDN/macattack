@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UnitSheetComponent } from '../unit-sheet/unit-sheet.component';
+import { MAC } from '../interfaces/mac';
+import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 
 @Component({
   selector: 'app-roster',
@@ -10,10 +12,14 @@ import { UnitSheetComponent } from '../unit-sheet/unit-sheet.component';
   styleUrl: './roster.component.css'
 })
 export class RosterComponent {
-  unitSheets: number[] = [];
+  unitSheets: (MAC | AuxiliaryUnit)[] = [];
 
   addUnitSheet() {
-    this.unitSheets.push(this.unitSheets.length + 1);
+    this.unitSheets.push({
+      name: "(your unit name)",
+      class: 1,
+      modules: []
+    });
   }
 
   removeUnitSheet(index: number) {

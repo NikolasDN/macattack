@@ -1,9 +1,9 @@
 <h3>Roster</h3>
 
-<div *ngFor="let sheet of unitSheets; let i = index" style="position: relative; margin-bottom: 1em;">
+<div *ngFor="let unit of unitSheets; let i = index" style="position: relative; margin-bottom: 1em;">
   <button (click)="removeUnitSheet(i)" style="position: absolute; right: 0; top: 0; background: none; border: none; cursor: pointer; font-size: 1.5em;" title="Remove">
     🗑️
   </button>
-  <app-unit-sheet></app-unit-sheet>
+  <app-unit-sheet [unit]="unit"></app-unit-sheet>
 </div>
 <button (click)="addUnitSheet()">Add Unit Sheet</button>

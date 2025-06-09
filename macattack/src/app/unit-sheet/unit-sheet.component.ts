@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Module } from '../interfaces/module';
 import { Weapon } from '../interfaces/weapon';
 import { Hardware } from '../interfaces/hardware';
-import { MAC } from '../interfaces/MAC';
+import { MAC } from '../interfaces/mac';
 import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 
 @Component({

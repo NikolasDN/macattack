@@ -1,4 +1,4 @@
-import { MAC } from "./MAC";
+import { MAC } from "./mac";
 import { AuxiliaryUnit } from "./auxiliaryunit";
 
 export interface Force {
