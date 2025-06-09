@@ -7,4 +7,4 @@ export interface MAC {
   }
 
   // Enum for MAC class types
-type MACClass = 1 | 2 | 3;
+export type MACClass = 1 | 2 | 3;

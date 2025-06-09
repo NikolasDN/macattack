@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UnitSheetComponent } from '../unit-sheet/unit-sheet.component';
 import { MAC } from '../interfaces/mac';
 import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-roster',
@@ -13,6 +14,9 @@ import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 })
 export class RosterComponent {
   unitSheets: (MAC | AuxiliaryUnit)[] = [];
+  totalCost: number = 0;
+
+  constructor(private utils: UtilsService) {}
 
   addUnitSheet() {
     this.unitSheets.push({
@@ -20,9 +24,21 @@ export class RosterComponent {
       class: 1,
       modules: []
     });
+    this.totalCost = this.getTotalCost();
   }
 
   removeUnitSheet(index: number) {
     this.unitSheets.splice(index, 1);
+    this.totalCost = this.getTotalCost();
+  }
+
+  getTotalCost(): number {
+    return this.unitSheets.reduce((total, unit) => {
+      return total + this.utils.getCost(unit);
+    }, 0);
+  }
+
+  onUnitChanged() {
+    this.totalCost = this.getTotalCost();
   }
 }
