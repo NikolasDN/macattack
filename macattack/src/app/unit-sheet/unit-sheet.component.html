@@ -43,40 +43,17 @@
         <td class="s3" dir="ltr"><b>HIT</b></td>
         <td class="s3" dir="ltr"><b>NOTES</b></td>
     </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">1</td>
-        <td class="s1" dir="ltr">SG3 Missiles</td>
+    <tr style="height: 24px" *ngFor="let i of [0,1,2,3,4,5]">
+        <td class="s1" dir="ltr">{{i + 1}}</td>
+        <td class="s1" dir="ltr">
+            <select [(ngModel)]="unit.modules[i]" style="width: 100%; height: 100%; border: none; text-align: center;">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let module of getAvailableModules(unit, i + 1)" [ngValue]="module">
+                    {{getModuleName(module)}}
+                </option>
+            </select>
+        </td>
         <td class="s1"></td>
-        <td class="s1"></td>
-    </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">2</td>
-        <td class="s1" dir="ltr">Jet</td>
-        <td class="s1"></td>
-        <td class="s1" dir="ltr">Jump 9&quot;</td>
-    </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">3</td>
-        <td class="s1" dir="ltr">Jet</td>
-        <td class="s1"></td>
-        <td class="s1" dir="ltr">Jump 9&quot;</td>
-    </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">4</td>
-        <td class="s1" dir="ltr">Insulant</td>
-        <td class="s1"></td>
-        <td class="s1" dir="ltr">First attack -1 heat</td>
-    </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">5</td>
-        <td class="s1" dir="ltr">Insulant</td>
-        <td class="s1"></td>
-        <td class="s1" dir="ltr">First attack -1 heat</td>
-    </tr>
-    <tr style="height: 24px">
-        <td class="s1" dir="ltr">6</td>
-        <td class="s1" dir="ltr">Coolant</td>
-        <td class="s1"></td>
-        <td class="s1" dir="ltr">Cool 2. +2 Heat Destroyed</td>
+        <td class="s1" dir="ltr">{{getModuleEffect(unit.modules[i])}}</td>
     </tr>
 </table>

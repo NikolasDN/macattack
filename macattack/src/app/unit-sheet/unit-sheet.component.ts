@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Module } from '../interfaces/module';
 import { Weapon } from '../interfaces/weapon';
 import { Hardware } from '../interfaces/hardware';
@@ -9,7 +10,7 @@ import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 @Component({
   selector: 'app-unit-sheet',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './unit-sheet.component.html',
   styleUrl: './unit-sheet.component.css'
 })
@@ -80,7 +81,7 @@ export class UnitSheetComponent {
     { type: "hardware", hardware: { name: "Vent", applicableTo: "M", effect: "Lose 2 Heat when holding in move phase." } },
   ];
   @Input() unit: MAC | AuxiliaryUnit = {
-    name: "The Predator",
+    name: "(your unit name)",
     class: 1,
     modules: []
   }
@@ -135,5 +136,62 @@ export class UnitSheetComponent {
     } else {
       return 1 + unit.modules.filter(f => f.type === 'hardware').length + unit.modules.filter(f => f.type === 'weapon').reduce((sum, weapon) => sum + (weapon.weapon?.power || 0), 0);
     }
+  }
+
+  getAvailableModules(unit: MAC | AuxiliaryUnit, slot: number): Module[] {
+    return this.allModules.filter(module => {
+      if (module.type === 'hardware') {
+        const applicableTo = module.hardware?.applicableTo;
+        if (this.isMAC(unit)) {
+          return applicableTo === 'M' || applicableTo === 'A';
+        } else if (unit.type === 'infantry') {
+          return applicableTo === 'I' || applicableTo === 'A';
+        } else if (unit.type === 'vehicle') {
+          return applicableTo === 'V' || applicableTo === 'A';
+        }
+      }
+      if (module.type === 'weapon') {
+        if (this.isAuxiliaryType(unit, 'infantry') && (module.weapon?.power || 0) > 1) return false;
+        if (this.isAuxiliaryType(unit, 'vehicle') && (module.weapon?.power || 0) > 2) return false;
+        if (this.isMAC(unit) && slot === 1 && (module.weapon?.power || 0) > unit.class + 1) return false;
+        if (this.isMAC(unit) && slot > 1 && (module.weapon?.power || 0) > unit.class) return false;
+      }
+      return true; // All weapons are available to all unit types
+    });
+  }
+
+  selectModule(index: number, module: Module | null) {
+    if (index >= 0 && index < 6) {
+      // Ensure the modules array has enough slots
+      while (this.unit.modules.length <= index) {
+        this.unit.modules.push({
+          type: 'weapon',
+          status: 'intact'
+        });
+      }
+      this.unit.modules[index] = module || {
+        type: 'weapon', 
+        status: 'intact'
+      };
+    }
+  }
+
+  getModuleName(module: Module | null): string {
+    if (!module) return '';
+    if (module.type === 'weapon' && module.weapon) {
+      return `${module.weapon.range || ''}${module.weapon.type}${module.weapon.power}-${module.weapon.subtype || ''} ${module.weapon.name}`;
+    }
+    return module.hardware?.name || '';
+  }
+
+  getModuleEffect(module: Module | null): string {
+    if (!module) return '';
+    
+    if (module.type === 'weapon') {
+      return "";// `${module.weapon?.name || ''} (${module.weapon?.power || 0})`;
+    } else if (module.type === 'hardware') {
+      return module.hardware?.effect || '';
+    }
+    return '';
   }
 }
