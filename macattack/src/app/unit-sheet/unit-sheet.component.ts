@@ -54,7 +54,7 @@ export class UnitSheetComponent {
       this.unit = {
         name: this.unit.name,
         type: unitType,
-        formationSize: 1, 
+        formationSize: 1,
         modules: []
       };
     }

@@ -38,7 +38,8 @@ export class RosterComponent {
     }, 0);
   }
 
-  onUnitChanged() {
+  onUnitChanged(updatedUnit: MAC | AuxiliaryUnit, index: number) {
+    this.unitSheets[index] = updatedUnit;
     this.totalCost = this.getTotalCost();
   }
 }
