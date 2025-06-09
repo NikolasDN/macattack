@@ -82,8 +82,7 @@ export class UnitSheetComponent {
   @Input() unit: MAC | AuxiliaryUnit = {
     name: "The Predator",
     class: 1,
-    modules: [],
-    commander: true,
+    modules: []
   }
 
   isMAC(unit: MAC | AuxiliaryUnit): unit is MAC {
@@ -104,24 +103,21 @@ export class UnitSheetComponent {
       this.unit = {
         ...this.unit,
         class: classNum as 1 | 2 | 3,
-        modules: [],
-        commander: true
+        modules: []
       };
     } else if (type === 'Infantry AU') {
       this.unit = {
         name: this.unit.name,
         type: 'infantry',
         formationSize: 1,
-        weapons: [],
-        hardware: []
+        modules: []
       };
     } else if (type === 'Vehicle AU') {
       this.unit = {
         name: this.unit.name,
         type: 'vehicle',
         formationSize: 1,
-        weapons: [],
-        hardware: []
+        modules: []
       };
     }
   }
@@ -137,7 +133,7 @@ export class UnitSheetComponent {
           return 20;
       }
     } else {
-      return 1 + unit.hardware.length + unit.weapons.reduce((sum, weapon) => sum + (weapon.power || 0), 0);
+      return 1 + unit.modules.filter(f => f.type === 'hardware').length + unit.modules.filter(f => f.type === 'weapon').reduce((sum, weapon) => sum + (weapon.weapon?.power || 0), 0);
     }
   }
 }

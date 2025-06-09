@@ -1,10 +1,7 @@
-import { Weapon } from "./weapon";
-import { Hardware } from "./hardware";
-
+import { Module } from "./module";
 export interface AuxiliaryUnit {
     name: string;
     type: "infantry" | "vehicle";
     formationSize: number;
-    weapons: Weapon[];
-    hardware: Hardware[];
+    modules: Module[];
   }
