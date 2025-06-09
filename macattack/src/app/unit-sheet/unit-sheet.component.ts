@@ -127,6 +127,17 @@ export class UnitSheetComponent {
   }
 
   getCost(unit: MAC | AuxiliaryUnit): number {
-    return 0;
+    if (this.isMAC(unit)) {
+      switch (unit.class) {
+        case 1:
+          return 12;
+        case 2:
+          return 16;
+        case 3:
+          return 20;
+      }
+    } else {
+      return 1 + unit.hardware.length + unit.weapons.reduce((sum, weapon) => sum + (weapon.power || 0), 0);
+    }
   }
 }
