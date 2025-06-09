@@ -1,8 +1,9 @@
-interface MAC {
+import { Module } from "./module";
+
+export interface MAC {
     name: string;
     class: MACClass;
-    modules: [Module, Module, Module, Module, Module, Module];
-    initiativeCard: string;
+    modules: Module[];
     commander?: boolean;
   }
 

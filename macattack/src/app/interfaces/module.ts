@@ -1,5 +1,8 @@
-interface Module {
-    slot: number;
+import { Weapon } from "./weapon";
+import { Hardware } from "./hardware";
+
+export interface Module {
+    slot?: number;
     type: "weapon" | "hardware";
     weapon?: Weapon;
     hardware?: Hardware;
