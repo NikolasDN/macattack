@@ -84,22 +84,6 @@ export class UnitSheetComponent {
     });
   }
 
-  selectModule(index: number, module: Module | null) {
-    if (index >= 0 && index < 6) {
-      // Ensure the modules array has enough slots
-      while (this.unit.modules.length <= index) {
-        this.unit.modules.push({
-          type: 'weapon',
-          status: 'intact'
-        });
-      }
-      this.unit.modules[index] = module || {
-        type: 'weapon', 
-        status: 'intact'
-      };
-    }
-  }
-
   getModuleName(module: Module | null): string {
     if (!module) return '';
     if (module.type === 'weapon' && module.weapon) {
@@ -117,5 +101,22 @@ export class UnitSheetComponent {
       return module.hardware?.effect || '';
     }
     return '';
+  }
+
+  selectModule(index: number, module: Module | null) {
+    if (index >= 0 && index < 6) {
+      // Ensure the modules array has enough slots
+      while (this.unit.modules.length <= index) {
+        this.unit.modules.push({
+          type: 'weapon',
+          status: 'intact'
+        });
+      }
+      this.unit.modules[index] = module || {
+        type: 'weapon', 
+        status: 'intact'
+      };
+      this.unitChanged.emit(this.unit);
+    }
   }
 }

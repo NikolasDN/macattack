@@ -51,7 +51,7 @@
     <tr style="height: 24px" *ngFor="let i of [0,1,2,3,4,5]">
         <td class="s1" dir="ltr" style="width: 50px;">{{i + 1}}</td>
         <td class="s1" dir="ltr" style="width: 150px;">
-            <select [(ngModel)]="unit.modules[i]" style="width: 100%; height: 100%; border: none; text-align: left;">
+            <select [(ngModel)]="unit.modules[i]" (ngModelChange)="unitChanged.emit(unit)" style="width: 100%; height: 100%; border: none; text-align: left;">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let module of getAvailableModules(unit, i + 1)" [ngValue]="module">
                     {{getModuleName(module)}}

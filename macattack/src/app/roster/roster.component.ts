@@ -20,8 +20,33 @@ export class RosterComponent {
     units: []
   };
   totalCost: number = 0;
+  validationMessages: string[] = [];
 
   constructor(private utils: UtilsService) {}
+
+  validateForce() {
+    this.validationMessages = [];
+    
+    // Count MACs and auxiliary units
+    const macs = this.force.units.filter(unit => this.utils.isMAC(unit));
+    const auxiliaries = this.force.units.filter(unit => !this.utils.isMAC(unit));
+    
+    // Check minimum MAC requirement
+    if (macs.length < 3) {
+      this.validationMessages.push("Your force needs to consist of at least 3 MACs");
+    }
+    
+    // Check auxiliary unit limit
+    if (auxiliaries.length > macs.length) {
+      this.validationMessages.push("You cannot have more auxiliary units than MACs");
+    }
+    
+    // Check MAC module count
+    const macsWithIncompleteModules = macs.filter(mac => mac.modules.length !== 6);
+    if (macsWithIncompleteModules.length > 0) {
+      this.validationMessages.push("Not all MACs have 6 modules");
+    }
+  }
 
   addUnitSheet() {
     this.force.units.push({
@@ -30,11 +55,13 @@ export class RosterComponent {
       modules: []
     });
     this.totalCost = this.getTotalCost();
+    this.validateForce();
   }
 
   removeUnitSheet(index: number) {
     this.force.units.splice(index, 1);
     this.totalCost = this.getTotalCost();
+    this.validateForce();
   }
 
   getTotalCost(): number {
@@ -46,5 +73,6 @@ export class RosterComponent {
   onUnitChanged(updatedUnit: MAC | AuxiliaryUnit, index: number) {
     this.force.units[index] = updatedUnit;
     this.totalCost = this.getTotalCost();
+    this.validateForce();
   }
 }

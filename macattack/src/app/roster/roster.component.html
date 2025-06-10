@@ -2,6 +2,13 @@
   <h2>MAC Attack roster</h2>
   <b>Total Cost: {{getTotalCost()}} points</b>
 </div>
+
+<div *ngIf="validationMessages.length > 0" style="margin-bottom: 1em;">
+  <div *ngFor="let message of validationMessages" style="color: #dc3545; margin-bottom: 0.5em;">
+    {{message}}
+  </div>
+</div>
+
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
   <div *ngFor="let unit of force.units; let i = index" style="position: relative;">
     <app-unit-sheet [unit]="force.units[i]" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
