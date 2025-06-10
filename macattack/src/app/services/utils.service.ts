@@ -246,14 +246,22 @@ export class UtilsService {
           break;
       }
       // Count Frame modules and reduce cost
-      const frameCount = unit.modules.filter(module => 
-        module.type === 'hardware' && module.hardware?.name === 'Frame'
+      const frameCount = unit.modules.filter((m: Module) => 
+        m.type === 'hardware' && m.hardware?.name === 'Frame'
       ).length;
       return baseCost - frameCount;
     } else {
-      return 1 + unit.modules.filter((f: Module) => f.type === 'hardware').length + 
-             unit.modules.filter((f: Module) => f.type === 'weapon')
-               .reduce((sum: number, weapon: Module) => sum + (weapon.weapon?.power || 0), 0);
+      let cost = 1; // Base cost of 1 for auxiliary units
+      // Add cost for each module
+      unit.modules.forEach((module: Module) => {
+        if (module.type === "weapon" && module.weapon) {
+          cost += module.weapon.power;
+        } else if (module.type === "hardware") {
+          cost += 1;
+        }
+      });
+      // Multiply cost by formation size for auxiliary units
+      return cost * (unit.formationSize || 1);
     }
   }
 } 
