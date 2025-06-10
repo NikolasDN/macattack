@@ -3,6 +3,6 @@ export interface Weapon {
     range?: "S" | "L" | "A"; // Short, Long, Arc
     type: "B" | "P" | "G" | "M"; // Burst, Piercing, Guided, Multi
     power: 1 | 2 | 3 | 4;
-    subtype?: "X" | "T" | "J" | "R" | "TX" | "RX" | "JX" | "RJ" | "JRX" | "RJX"; // Expendable, Thermal, Jolt, Rad
+    subtype?: "X" | "T" | "J" | "R" | "TX" | "RX" | "JX"; // Expendable, Thermal, Jolt, Rad
     isBrawl?: boolean;
   }

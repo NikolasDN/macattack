@@ -9,22 +9,176 @@ import { Module } from '../interfaces/module';
 export class UtilsService {
   // 📦 All modules: weapons and hardware
   allModules: Module[] = [
-    // 🔫 Notable Weapons
+    // Short Range Weapons (S)
+    // Power 1
     { type: "weapon", weapon: { name: "LaserCarbine", range: "S", type: "P", power: 1 } },
-    { type: "weapon", weapon: { name: "AutoCannon", range: "L", type: "B", power: 2 } },
-    { type: "weapon", weapon: { name: "GodHammer", range: "A", type: "G", power: 4 } },
-    { type: "weapon", weapon: { name: "Howitzer", range: "A", type: "B", power: 2 } },
-    { type: "weapon", weapon: { name: "Annihilator", range: "L", type: "P", power: 4 } },
-    { type: "weapon", weapon: { name: "SmartCannon", range: "L", type: "G", power: 2 } },
+    { type: "weapon", weapon: { name: "PulseBlaster", range: "S", type: "B", power: 1 } },
+    { type: "weapon", weapon: { name: "SeekerDart", range: "S", type: "G", power: 1 } },
     { type: "weapon", weapon: { name: "FlakRepeater", range: "S", type: "M", power: 1 } },
-    { type: "weapon", weapon: { name: "ImploderPod", range: "L", type: "P", power: 4, subtype: "X" } },
-    { type: "weapon", weapon: { name: "ShockOrb", range: "A", type: "M", power: 2, subtype: "J" } },
-    { type: "weapon", weapon: { name: "FusionBomb", range: "S", type: "P", power: 1, subtype: "X" } },
+    // Power 1 with subtypes
+    { type: "weapon", weapon: { name: "RadPistol", range: "S", type: "P", power: 1, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatBlaster", range: "S", type: "B", power: 1, subtype: "T" } },
+    { type: "weapon", weapon: { name: "StunGun", range: "S", type: "G", power: 1, subtype: "J" } },
+    { type: "weapon", weapon: { name: "FusionBomb", range: "S", type: "M", power: 1, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadBolt", range: "S", type: "P", power: 1, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatWave", range: "S", type: "B", power: 1, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "StunPod", range: "S", type: "G", power: 1, subtype: "JX" } },
+
+    // Power 2
+    { type: "weapon", weapon: { name: "PlasmaRifle", range: "S", type: "P", power: 2 } },
+    { type: "weapon", weapon: { name: "BurstCannon", range: "S", type: "B", power: 2 } },
+    { type: "weapon", weapon: { name: "HomingMissile", range: "S", type: "G", power: 2 } },
+    { type: "weapon", weapon: { name: "ScatterGun", range: "S", type: "M", power: 2 } },
+    // Power 2 with subtypes
     { type: "weapon", weapon: { name: "GammaRay", range: "S", type: "P", power: 2, subtype: "R" } },
-    { type: "weapon", weapon: { name: "HellSurge", range: "S", type: "B", power: 4, subtype: "T" } },
-    { type: "weapon", weapon: { name: "FlareMissiles", range: "L", type: "B", power: 2, subtype: "TX" } },
-    { type: "weapon", weapon: { name: "BarometricBombs", range: "A", type: "B", power: 3, subtype: "JX" } },
+    { type: "weapon", weapon: { name: "FlameThrower", range: "S", type: "B", power: 2, subtype: "T" } },
+    { type: "weapon", weapon: { name: "ShockOrb", range: "S", type: "G", power: 2, subtype: "J" } },
+    { type: "weapon", weapon: { name: "FragGrenade", range: "S", type: "M", power: 2, subtype: "X" } },
     { type: "weapon", weapon: { name: "ToxiPods", range: "S", type: "P", power: 2, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatBurst", range: "S", type: "B", power: 2, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "StunMissile", range: "S", type: "G", power: 2, subtype: "JX" } },
+
+    // Power 3
+    { type: "weapon", weapon: { name: "PlasmaCutter", range: "S", type: "P", power: 3 } },
+    { type: "weapon", weapon: { name: "BlastCannon", range: "S", type: "B", power: 3 } },
+    { type: "weapon", weapon: { name: "SeekerMissile", range: "S", type: "G", power: 3 } },
+    { type: "weapon", weapon: { name: "MultiCannon", range: "S", type: "M", power: 3 } },
+    // Power 3 with subtypes
+    { type: "weapon", weapon: { name: "RadBeam", range: "S", type: "P", power: 3, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HellSurge", range: "S", type: "B", power: 3, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltCannon", range: "S", type: "G", power: 3, subtype: "J" } },
+    { type: "weapon", weapon: { name: "ClusterBomb", range: "S", type: "M", power: 3, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadCluster", range: "S", type: "P", power: 3, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatCluster", range: "S", type: "B", power: 3, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltCluster", range: "S", type: "G", power: 3, subtype: "JX" } },
+
+    // Power 4
+    { type: "weapon", weapon: { name: "PlasmaLance", range: "S", type: "P", power: 4 } },
+    { type: "weapon", weapon: { name: "MegaCannon", range: "S", type: "B", power: 4 } },
+    { type: "weapon", weapon: { name: "DeathMissile", range: "S", type: "G", power: 4 } },
+    { type: "weapon", weapon: { name: "DoomCannon", range: "S", type: "M", power: 4 } },
+    // Power 4 with subtypes
+    { type: "weapon", weapon: { name: "RadLance", range: "S", type: "P", power: 4, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HellCannon", range: "S", type: "B", power: 4, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltLance", range: "S", type: "G", power: 4, subtype: "J" } },
+    { type: "weapon", weapon: { name: "MegaBomb", range: "S", type: "M", power: 4, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadBomb", range: "S", type: "P", power: 4, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatBomb", range: "S", type: "B", power: 4, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltBomb", range: "S", type: "G", power: 4, subtype: "JX" } },
+
+    // Long Range Weapons (L)
+    // Power 1
+    { type: "weapon", weapon: { name: "LaserRifle", range: "L", type: "P", power: 1 } },
+    { type: "weapon", weapon: { name: "AutoCannon", range: "L", type: "B", power: 1 } },
+    { type: "weapon", weapon: { name: "SmartCannon", range: "L", type: "G", power: 1 } },
+    { type: "weapon", weapon: { name: "MultiCannon", range: "L", type: "M", power: 1 } },
+    // Power 1 with subtypes
+    { type: "weapon", weapon: { name: "RadRifle", range: "L", type: "P", power: 1, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatCannon", range: "L", type: "B", power: 1, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltRifle", range: "L", type: "G", power: 1, subtype: "J" } },
+    { type: "weapon", weapon: { name: "ImpactNeedle", range: "L", type: "M", power: 1, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadNeedle", range: "L", type: "P", power: 1, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatNeedle", range: "L", type: "B", power: 1, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltNeedle", range: "L", type: "G", power: 1, subtype: "JX" } },
+
+    // Power 2
+    { type: "weapon", weapon: { name: "PlasmaCannon", range: "L", type: "P", power: 2 } },
+    { type: "weapon", weapon: { name: "BurstCannon", range: "L", type: "B", power: 2 } },
+    { type: "weapon", weapon: { name: "GuidedMissile", range: "L", type: "G", power: 2 } },
+    { type: "weapon", weapon: { name: "FlakCannon", range: "L", type: "M", power: 2 } },
+    // Power 2 with subtypes
+    { type: "weapon", weapon: { name: "RadCannon", range: "L", type: "P", power: 2, subtype: "R" } },
+    { type: "weapon", weapon: { name: "FireCannon", range: "L", type: "B", power: 2, subtype: "T" } },
+    { type: "weapon", weapon: { name: "GravTether", range: "L", type: "G", power: 2, subtype: "J" } },
+    { type: "weapon", weapon: { name: "FlareMissiles", range: "L", type: "M", power: 2, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadMissile", range: "L", type: "P", power: 2, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatMissile", range: "L", type: "B", power: 2, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltMissile", range: "L", type: "G", power: 2, subtype: "JX" } },
+
+    // Power 3
+    { type: "weapon", weapon: { name: "QuantumLance", range: "L", type: "P", power: 3 } },
+    { type: "weapon", weapon: { name: "ClusterBomb", range: "L", type: "B", power: 3 } },
+    { type: "weapon", weapon: { name: "DroneSwarm", range: "L", type: "G", power: 3 } },
+    { type: "weapon", weapon: { name: "ParticleBeam", range: "L", type: "M", power: 3 } },
+    // Power 3 with subtypes
+    { type: "weapon", weapon: { name: "RadLance", range: "L", type: "P", power: 3, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatLance", range: "L", type: "B", power: 3, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltLance", range: "L", type: "G", power: 3, subtype: "J" } },
+    { type: "weapon", weapon: { name: "BarometricBombs", range: "L", type: "M", power: 3, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadBomb", range: "L", type: "P", power: 3, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatBomb", range: "L", type: "B", power: 3, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltBomb", range: "L", type: "G", power: 3, subtype: "JX" } },
+
+    // Power 4
+    { type: "weapon", weapon: { name: "Annihilator", range: "L", type: "P", power: 4 } },
+    { type: "weapon", weapon: { name: "MegaCannon", range: "L", type: "B", power: 4 } },
+    { type: "weapon", weapon: { name: "DeathMissile", range: "L", type: "G", power: 4 } },
+    { type: "weapon", weapon: { name: "DoomCannon", range: "L", type: "M", power: 4 } },
+    // Power 4 with subtypes
+    { type: "weapon", weapon: { name: "RadAnnihilator", range: "L", type: "P", power: 4, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatAnnihilator", range: "L", type: "B", power: 4, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltAnnihilator", range: "L", type: "G", power: 4, subtype: "J" } },
+    { type: "weapon", weapon: { name: "ImploderPod", range: "L", type: "M", power: 4, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadImploder", range: "L", type: "P", power: 4, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatImploder", range: "L", type: "B", power: 4, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltImploder", range: "L", type: "G", power: 4, subtype: "JX" } },
+
+    // Arc Range Weapons (A)
+    // Power 1
+    { type: "weapon", weapon: { name: "ArcLaser", range: "A", type: "P", power: 1 } },
+    { type: "weapon", weapon: { name: "ArcBlaster", range: "A", type: "B", power: 1 } },
+    { type: "weapon", weapon: { name: "ArcSeeker", range: "A", type: "G", power: 1 } },
+    { type: "weapon", weapon: { name: "ArcFlak", range: "A", type: "M", power: 1 } },
+    // Power 1 with subtypes
+    { type: "weapon", weapon: { name: "RadArc", range: "A", type: "P", power: 1, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatArc", range: "A", type: "B", power: 1, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltArc", range: "A", type: "G", power: 1, subtype: "J" } },
+    { type: "weapon", weapon: { name: "ArcBomb", range: "A", type: "M", power: 1, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadArcBomb", range: "A", type: "P", power: 1, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatArcBomb", range: "A", type: "B", power: 1, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltArcBomb", range: "A", type: "G", power: 1, subtype: "JX" } },
+
+    // Power 2
+    { type: "weapon", weapon: { name: "Howitzer", range: "A", type: "P", power: 2 } },
+    { type: "weapon", weapon: { name: "ArcCannon", range: "A", type: "B", power: 2 } },
+    { type: "weapon", weapon: { name: "ArcMissile", range: "A", type: "G", power: 2 } },
+    { type: "weapon", weapon: { name: "ArcArray", range: "A", type: "M", power: 2 } },
+    // Power 2 with subtypes
+    { type: "weapon", weapon: { name: "RadHowitzer", range: "A", type: "P", power: 2, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatHowitzer", range: "A", type: "B", power: 2, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltHowitzer", range: "A", type: "G", power: 2, subtype: "J" } },
+    { type: "weapon", weapon: { name: "ArcPod", range: "A", type: "M", power: 2, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadArcPod", range: "A", type: "P", power: 2, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatArcPod", range: "A", type: "B", power: 2, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltArcPod", range: "A", type: "G", power: 2, subtype: "JX" } },
+
+    // Power 3
+    { type: "weapon", weapon: { name: "ThunderStrike", range: "A", type: "P", power: 3 } },
+    { type: "weapon", weapon: { name: "VortexCannon", range: "A", type: "B", power: 3 } },
+    { type: "weapon", weapon: { name: "ArcDrone", range: "A", type: "G", power: 3 } },
+    { type: "weapon", weapon: { name: "ArcStorm", range: "A", type: "M", power: 3 } },
+    // Power 3 with subtypes
+    { type: "weapon", weapon: { name: "NovaBurst", range: "A", type: "P", power: 3, subtype: "R" } },
+    { type: "weapon", weapon: { name: "MeteorStorm", range: "A", type: "B", power: 3, subtype: "T" } },
+    { type: "weapon", weapon: { name: "VoidRift", range: "A", type: "G", power: 3, subtype: "J" } },
+    { type: "weapon", weapon: { name: "TempestArray", range: "A", type: "M", power: 3, subtype: "X" } },
+    { type: "weapon", weapon: { name: "SolarFlare", range: "A", type: "P", power: 3, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "TsunamiWave", range: "A", type: "B", power: 3, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "GravityWell", range: "A", type: "G", power: 3, subtype: "JX" } },
+
+    // Power 4
+    { type: "weapon", weapon: { name: "GodHammer", range: "A", type: "P", power: 4 } },
+    { type: "weapon", weapon: { name: "DoomCannon", range: "A", type: "B", power: 4 } },
+    { type: "weapon", weapon: { name: "DeathMissile", range: "A", type: "G", power: 4 } },
+    { type: "weapon", weapon: { name: "Apocalypse", range: "A", type: "M", power: 4 } },
+    // Power 4 with subtypes
+    { type: "weapon", weapon: { name: "RadHammer", range: "A", type: "P", power: 4, subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatHammer", range: "A", type: "B", power: 4, subtype: "T" } },
+    { type: "weapon", weapon: { name: "JoltHammer", range: "A", type: "G", power: 4, subtype: "J" } },
+    { type: "weapon", weapon: { name: "HammerBomb", range: "A", type: "M", power: 4, subtype: "X" } },
+    { type: "weapon", weapon: { name: "RadHammerBomb", range: "A", type: "P", power: 4, subtype: "RX" } },
+    { type: "weapon", weapon: { name: "HeatHammerBomb", range: "A", type: "B", power: 4, subtype: "TX" } },
+    { type: "weapon", weapon: { name: "JoltHammerBomb", range: "A", type: "G", power: 4, subtype: "JX" } },
 
     // 🤜 Brawl Weapons
     { type: "weapon", weapon: { name: "Piston", isBrawl: true, power: 2, type: "P" } },
