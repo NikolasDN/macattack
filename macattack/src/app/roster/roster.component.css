@@ -1,0 +1,82 @@
+.roster-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.roster-actions {
+    display: flex;
+    gap: 1em;
+}
+
+.roster-content {
+    margin-bottom: 2em;
+}
+
+.roster-units {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.roster-summary {
+    margin-top: 1em;
+}
+
+.cost-summary {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.validation-messages {
+    color: #dc3545;
+}
+
+.validation-message {
+    margin-bottom: 0.5em;
+}
+
+.saved-forces {
+    margin-top: 2em;
+    padding-top: 2em;
+    border-top: 1px solid #ccc;
+}
+
+.saved-forces h3 {
+    margin-bottom: 1em;
+}
+
+.saved-forces-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.saved-force {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.saved-force-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.saved-force-date {
+    color: #666;
+}
+
+.saved-force-cost {
+    font-weight: bold;
+}
+
+.saved-force-actions {
+    display: flex;
+    gap: 0.5em;
+}

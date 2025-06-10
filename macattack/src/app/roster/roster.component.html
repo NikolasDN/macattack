@@ -1,18 +1,37 @@
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
-  <h2>MAC Attack roster</h2>
-  <b>Total Cost: {{getTotalCost()}} points</b>
+    <h2>MAC Attack roster</h2>
+    <div style="display: flex; gap: 1em; align-items: center;">
+        <b>Total Cost: {{getTotalCost()}} points</b>
+        <button (click)="saveForce()">Save Force</button>
+    </div>
 </div>
 
 <div *ngIf="validationMessages.length > 0" style="margin-bottom: 1em;">
-  <div *ngFor="let message of validationMessages" style="color: #dc3545; margin-bottom: 0.5em;">
-    {{message}}
-  </div>
+    <div *ngFor="let message of validationMessages" style="color: #dc3545; margin-bottom: 0.5em;">
+        {{message}}
+    </div>
 </div>
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
-  <div *ngFor="let unit of force.units; let i = index" style="position: relative;">
-    <app-unit-sheet [unit]="force.units[i]" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
-  </div>
+    <div *ngFor="let unit of force.units; let i = index" style="position: relative;">
+        <app-unit-sheet [unit]="force.units[i]" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
+    </div>
 </div>
 <br>
 <button (click)="addUnitSheet()">Add Unit Sheet</button>
+
+<div class="saved-forces" *ngIf="savedForces.length > 0">
+    <h3>Saved Forces</h3>
+    <div class="saved-forces-list">
+        <div *ngFor="let savedForce of savedForces" class="saved-force">
+            <div class="saved-force-info">
+                <span class="saved-force-date">{{ savedForce.date | date:'medium' }}</span>
+                <span class="saved-force-cost">Cost: {{ getTotalCost(savedForce.force) }} points</span>
+            </div>
+            <div class="saved-force-actions">
+                <button (click)="loadForce(savedForce.force)">Load</button>
+                <button (click)="deleteSavedForce(savedForce.key)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
