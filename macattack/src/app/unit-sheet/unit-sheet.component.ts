@@ -22,6 +22,7 @@ export class UnitSheetComponent {
     modules: []
   };
   @Output() unitChanged = new EventEmitter<MAC | AuxiliaryUnit>();
+  @Output() deleteUnit = new EventEmitter<void>();
 
   constructor(private utils: UtilsService) {}
 

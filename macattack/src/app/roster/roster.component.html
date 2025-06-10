@@ -1,14 +1,10 @@
-<h3>Roster</h3>
 <div style="margin-top: 1em; text-align: right;">
+  <h2>Roster</h2>
   <b>Total Cost: {{getTotalCost()}} points</b>
 </div>
-
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
   <div *ngFor="let unit of unitSheets; let i = index" style="position: relative;">
-    <button (click)="removeUnitSheet(i)" style="position: absolute; right: 0; top: 0; background: none; border: none; cursor: pointer; font-size: 1.5em; z-index: 1;" title="Remove">
-      🗑️
-    </button>
-    <app-unit-sheet [unit]="unitSheets[i]" (unitChanged)="onUnitChanged($event, i)"></app-unit-sheet>
+    <app-unit-sheet [unit]="unitSheets[i]" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
   </div>
 </div>
 <button (click)="addUnitSheet()">Add Unit Sheet</button>
