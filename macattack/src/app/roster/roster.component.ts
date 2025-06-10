@@ -4,6 +4,7 @@ import { UnitSheetComponent } from '../unit-sheet/unit-sheet.component';
 import { MAC } from '../interfaces/mac';
 import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 import { UtilsService } from '../services/utils.service';
+import { Force } from '../interfaces/force';
 
 @Component({
   selector: 'app-roster',
@@ -13,13 +14,17 @@ import { UtilsService } from '../services/utils.service';
   styleUrl: './roster.component.css'
 })
 export class RosterComponent {
-  unitSheets: (MAC | AuxiliaryUnit)[] = [];
+  force: Force = {
+    name: "MAC Attack",
+    pointsLimit: 50,
+    units: []
+  };
   totalCost: number = 0;
 
   constructor(private utils: UtilsService) {}
 
   addUnitSheet() {
-    this.unitSheets.push({
+    this.force.units.push({
       name: "(your unit name)",
       class: 1,
       modules: []
@@ -28,18 +33,18 @@ export class RosterComponent {
   }
 
   removeUnitSheet(index: number) {
-    this.unitSheets.splice(index, 1);
+    this.force.units.splice(index, 1);
     this.totalCost = this.getTotalCost();
   }
 
   getTotalCost(): number {
-    return this.unitSheets.reduce((total, unit) => {
+    return this.force.units.reduce((total, unit) => {
       return total + this.utils.getCost(unit);
     }, 0);
   }
 
   onUnitChanged(updatedUnit: MAC | AuxiliaryUnit, index: number) {
-    this.unitSheets[index] = updatedUnit;
+    this.force.units[index] = updatedUnit;
     this.totalCost = this.getTotalCost();
   }
 }

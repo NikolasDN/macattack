@@ -79,14 +79,23 @@ export class UtilsService {
 
   getCost(unit: MAC | AuxiliaryUnit): number {
     if (this.isMAC(unit)) {
+      let baseCost = 0;
       switch (unit.class) {
         case 1:
-          return 12;
+          baseCost = 12;
+          break;
         case 2:
-          return 16;
+          baseCost = 16;
+          break;
         case 3:
-          return 20;
+          baseCost = 20;
+          break;
       }
+      // Count Frame modules and reduce cost
+      const frameCount = unit.modules.filter(module => 
+        module.type === 'hardware' && module.hardware?.name === 'Frame'
+      ).length;
+      return baseCost - frameCount;
     } else {
       return 1 + unit.modules.filter((f: Module) => f.type === 'hardware').length + 
              unit.modules.filter((f: Module) => f.type === 'weapon')
