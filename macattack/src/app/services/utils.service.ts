@@ -181,6 +181,19 @@ export class UtilsService {
     { type: "weapon", weapon: { name: "JoltHammerBomb", range: "A", type: "G", power: 4, subtype: "JX" } },
 
     // 🤜 Brawl Weapons
+    // Power 1
+    { type: "weapon", weapon: { name: "LightPiston", isBrawl: true, power: 1, type: "P" } },
+    { type: "weapon", weapon: { name: "LightBlade", isBrawl: true, power: 1, type: "B" } },
+    { type: "weapon", weapon: { name: "LightGrapple", isBrawl: true, power: 1, type: "G" } },
+    { type: "weapon", weapon: { name: "LightMower", isBrawl: true, power: 1, type: "M" } },
+    { type: "weapon", weapon: { name: "LightGravTether", isBrawl: true, power: 1, type: "B", subtype: "J" } },
+    { type: "weapon", weapon: { name: "LightImpactNeedle", isBrawl: true, power: 1, type: "P", subtype: "X" } },
+    { type: "weapon", weapon: { name: "LightFireScythe", isBrawl: true, power: 1, type: "M", subtype: "T" } },
+    { type: "weapon", weapon: { name: "LightRadPunch", isBrawl: true, power: 1, type: "P", subtype: "R" } },
+    { type: "weapon", weapon: { name: "LightHeatBlade", isBrawl: true, power: 1, type: "B", subtype: "T" } },
+    { type: "weapon", weapon: { name: "LightStunClaw", isBrawl: true, power: 1, type: "G", subtype: "J" } },
+
+    // Power 2 (existing ones)
     { type: "weapon", weapon: { name: "Piston", isBrawl: true, power: 2, type: "P" } },
     { type: "weapon", weapon: { name: "Blade", isBrawl: true, power: 2, type: "B" } },
     { type: "weapon", weapon: { name: "Grapple", isBrawl: true, power: 2, type: "G" } },
@@ -188,6 +201,21 @@ export class UtilsService {
     { type: "weapon", weapon: { name: "GravTether", isBrawl: true, power: 2, type: "B", subtype: "J" } },
     { type: "weapon", weapon: { name: "ImpactNeedle", isBrawl: true, power: 2, type: "P", subtype: "X" } },
     { type: "weapon", weapon: { name: "FireScythe", isBrawl: true, power: 2, type: "M", subtype: "T" } },
+    { type: "weapon", weapon: { name: "RadPunch", isBrawl: true, power: 2, type: "P", subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeatBlade", isBrawl: true, power: 2, type: "B", subtype: "T" } },
+    { type: "weapon", weapon: { name: "StunClaw", isBrawl: true, power: 2, type: "G", subtype: "J" } },
+
+    // Power 3
+    { type: "weapon", weapon: { name: "HeavyPiston", isBrawl: true, power: 3, type: "P" } },
+    { type: "weapon", weapon: { name: "HeavyBlade", isBrawl: true, power: 3, type: "B" } },
+    { type: "weapon", weapon: { name: "HeavyGrapple", isBrawl: true, power: 3, type: "G" } },
+    { type: "weapon", weapon: { name: "HeavyMower", isBrawl: true, power: 3, type: "M" } },
+    { type: "weapon", weapon: { name: "HeavyGravTether", isBrawl: true, power: 3, type: "B", subtype: "J" } },
+    { type: "weapon", weapon: { name: "HeavyImpactNeedle", isBrawl: true, power: 3, type: "P", subtype: "X" } },
+    { type: "weapon", weapon: { name: "HeavyFireScythe", isBrawl: true, power: 3, type: "M", subtype: "T" } },
+    { type: "weapon", weapon: { name: "HeavyRadPunch", isBrawl: true, power: 3, type: "P", subtype: "R" } },
+    { type: "weapon", weapon: { name: "HeavyHeatBlade", isBrawl: true, power: 3, type: "B", subtype: "T" } },
+    { type: "weapon", weapon: { name: "HeavyStunClaw", isBrawl: true, power: 3, type: "G", subtype: "J" } },
 
     // ⚙️ Common Hardware (name, applicableTo, effect)
     { type: "hardware", hardware: { name: "Aerodrive", applicableTo: "V", effect: "Ignore terrain and collisions. Motion 3." } },

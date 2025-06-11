@@ -79,11 +79,16 @@ export class UnitSheetComponent {
           return applicableTo === 'V' || applicableTo === 'A';
         }
       }
-      if (module.type === 'weapon') {
+      if (module.type === 'weapon' && !module.weapon?.isBrawl) {
         if (this.isAuxiliaryType(unit, 'infantry') && (module.weapon?.power || 0) > 1) return false;
         if (this.isAuxiliaryType(unit, 'vehicle') && (module.weapon?.power || 0) > 2) return false;
         if (this.isMAC(unit) && slot === 1 && (module.weapon?.power || 0) > unit.class + 1) return false;
         if (this.isMAC(unit) && slot > 1 && (module.weapon?.power || 0) > unit.class) return false;
+      }
+      if (module.type === 'weapon' && module.weapon?.isBrawl) {
+        if (this.isAuxiliaryType(unit, 'infantry') && (module.weapon?.power || 0) != 2) return false;
+        if (this.isAuxiliaryType(unit, 'vehicle') && (module.weapon?.power || 0) != 1) return false;
+        if (this.isMAC(unit) && (module.weapon?.power || 0) != unit.class) return false;
       }
       return true; // All weapons are available to all unit types
     });
