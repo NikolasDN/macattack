@@ -51,7 +51,7 @@ export class UnitSheetComponent {
         name: this.unit.name,
         class: classNum as MACClass,
         modules: [],
-        image: "iVBORw0KGgoAAAANSUhEUgAAAY8AAADZCAYAAADYOry5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7P1nkKxZet+J/Y55XfrMsrdu1fWmvZnp6ZnBzGAwGJAgaHdFtxQlbMRKsRHcpUCAwdhvkjpCEVLow37Y2O9iiFiaJQktJGIXIEASwHjXZrqnu2/fvt6Ur0qf+Zpj9OFk3e4ZDBDAGAgc3X/Ee29VVlZVVr7nnMf9n/8j/tLffMqzgPce7x99+ieGEAIhxPc+/BiP8RiP8SOERwiJcw48KC3xHry3gEBIiUDgvMd7F55rHVLKR9//vT/vEeTiU+/xHgT+0bnmvUIgcVR479EqxqOoTIkXjun2kChxFC6mtZSgdQReIUWBMxKvTn7/TwbEL/79Fx8bj8d4jMf4jwbOBUPgXDirlJKLs8rivMNah1IKIWQwJkJg7cKwCDg5ob7fWSWkxAPSg8c9Og8FgFfhf1HhvQOvQGistxhXEh16uqsZDw5KaksC"
+        image: this.unit.image
       };
     } else if (type.includes('AU')) {
       const unitType = type.toLowerCase().includes('infantry') ? 'infantry' : 'vehicle';
@@ -60,7 +60,7 @@ export class UnitSheetComponent {
         type: unitType,
         formationSize: 1,
         modules: [],
-        image: "iVBORw0KGgoAAAANSUhEUgAAAY8AAADZCAYAAADYOry5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7P1nkKxZet+J/Y55XfrMsrdu1fWmvZnp6ZnBzGAwGJAgaHdFtxQlbMRKsRHcpUCAwdhvkjpCEVLow37Y2O9iiFiaJQktJGIXIEASwHjXZrqnu2/fvt6Ur0qf+Zpj9OFk3e4ZDBDAGAgc3X/Ee29VVlZVVr7nnMf9n/8j/tLffMqzgPce7x99+ieGEAIhxPc+/BiP8RiP8SOERwiJcw48KC3xHry3gEBIiUDgvMd7F55rHVLKR9//vT/vEeTiU+/xHgT+0bnmvUIgcVR479EqxqOoTIkXjun2kChxFC6mtZSgdQReIUWBMxKvTn7/TwbEL/79Fx8bj8d4jMf4jwbOBUPgXDirlJKLs8rivMNah1IKIWQwJkJg7cKwCDg5ob7fWSWkxAPSg8c9Og8FgFfhf1HhvQOvQGistxhXEh16uqsZDw5KaksC"
+        image: this.unit.image
       };
     }
     this.unitChanged.emit(this.unit);
