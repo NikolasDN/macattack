@@ -76,6 +76,21 @@ export class RosterComponent implements OnInit {
     if (hasIncompleteMACs) {
       this.validationMessages.push("Not all MACs have 6 modules");
     }
+
+    // Check brawl weapon restrictions
+    this.force.units.forEach(unit => {
+      const brawlWeapons = unit.modules.filter(m => m.type === 'weapon' && m.weapon?.isBrawl);
+      if (brawlWeapons.length > 2) {
+        this.validationMessages.push(`${unit.name} has more than 2 brawl weapons`);
+      }
+      if (brawlWeapons.length === 2) {
+        const firstBrawlType = brawlWeapons[0].weapon?.name;
+        const secondBrawlType = brawlWeapons[1].weapon?.name;
+        if (firstBrawlType !== secondBrawlType) {
+          this.validationMessages.push(`${unit.name} has different types of brawl weapons`);
+        }
+      }
+    });
   }
 
   getTotalCost(force: Force = this.force): number {
