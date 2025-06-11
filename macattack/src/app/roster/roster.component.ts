@@ -7,6 +7,7 @@ import { Force } from '../interfaces/force';
 import { MAC } from '../interfaces/mac';
 import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
 import { Module } from '../interfaces/module';
+import { ImagesService } from '../services/images.service';
 
 interface SavedForce {
   key: string;
@@ -31,7 +32,7 @@ export class RosterComponent implements OnInit {
   savedForces: SavedForce[] = [];
   printMode: boolean = false;
 
-  constructor(private utils: UtilsService) {}
+  constructor(private utils: UtilsService, private images: ImagesService) {}
 
   ngOnInit() {
     this.loadSavedForces();
@@ -42,7 +43,7 @@ export class RosterComponent implements OnInit {
       name: "(your unit name)",
       class: 1,
       modules: [],
-      image: this.utils.getDefaultImage()
+      image: this.images.getDefaultImage()
     };
     this.force.units.push(newMAC);
     this.validateForce();
