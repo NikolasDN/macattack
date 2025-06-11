@@ -80,16 +80,22 @@ export class RosterComponent implements OnInit {
   }
 
   saveForce() {
-    const timestamp = new Date().getTime();
-    const key = `force_${timestamp}`;
+    if (!this.force.name.trim()) {
+      return;
+    }
+    const key = `force_${this.force.name.trim().toLowerCase().replace(/\s+/g, '_')}`;
     const savedForce: SavedForce = {
       key,
-      date: new Date(timestamp),
+      date: new Date(),
       force: JSON.parse(JSON.stringify(this.force)) // Deep copy
     };
     
     localStorage.setItem(key, JSON.stringify(savedForce));
     this.loadSavedForces();
+  }
+
+  isForceNameValid(): boolean {
+    return this.force.name.trim().length > 0;
   }
 
   loadForce(force: Force) {

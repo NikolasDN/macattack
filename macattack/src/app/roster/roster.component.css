@@ -68,8 +68,15 @@
     gap: 0.5em;
 }
 
+.saved-force-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 0.25em;
+}
+
 .saved-force-date {
     color: #666;
+    font-size: 0.9em;
 }
 
 .saved-force-cost {

@@ -1,8 +1,10 @@
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
-    <h2>MAC Attack roster</h2>
+    <div style="display: flex; align-items: center; gap: 1em;">
+        <input type="text" [(ngModel)]="force.name" style="font-size: 1.5em; font-weight: bold; border: none; background: none; text-align: left;" />
+    </div>
     <div style="display: flex; gap: 1em; align-items: center;">
         <b>Total Cost: {{getTotalCost()}} points</b>
-        <button (click)="saveForce()">Save Force</button>
+        <button (click)="saveForce()" [disabled]="!isForceNameValid()">Save Force</button>
     </div>
 </div>
 
@@ -25,6 +27,7 @@
     <div class="saved-forces-list">
         <div *ngFor="let savedForce of savedForces" class="saved-force">
             <div class="saved-force-info">
+                <span class="saved-force-name">{{ savedForce.force.name }}</span>
                 <span class="saved-force-date">{{ savedForce.date | date:'medium' }}</span>
                 <span class="saved-force-cost">Cost: {{ getTotalCost(savedForce.force) }} points</span>
             </div>
