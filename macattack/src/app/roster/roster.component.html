@@ -1,39 +1,50 @@
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
-    <div style="display: flex; align-items: center; gap: 1em;">
-        <input type="text" [(ngModel)]="force.name" style="font-size: 1.5em; font-weight: bold; border: none; background: none; text-align: left;" />
+<div class="roster-container">
+    <!-- Header -->
+    <div class="roster-header">
+        <div class="roster-title">
+            <input type="text" [(ngModel)]="force.name" style="font-size: 1.5em; font-weight: bold; border: none; background: none; text-align: left;" />
+        </div>
+        <div class="roster-actions">
+            <b>Total Cost: {{getTotalCost()}} points</b>
+            <button (click)="saveForce()" [disabled]="!isForceNameValid()">Save Force</button>
+            <button (click)="printRoster()">Print Roster</button>
+        </div>
     </div>
-    <div style="display: flex; gap: 1em; align-items: center;">
-        <b>Total Cost: {{getTotalCost()}} points</b>
-        <button (click)="saveForce()" [disabled]="!isForceNameValid()">Save Force</button>
-    </div>
-</div>
 
-<div *ngIf="validationMessages.length > 0" style="margin-bottom: 1em;">
-    <div *ngFor="let message of validationMessages" style="color: #dc3545; margin-bottom: 0.5em;">
-        {{message}}
+    <!-- Validation Messages -->
+    <div *ngIf="validationMessages.length > 0" class="validation-messages">
+        <div *ngFor="let message of validationMessages" class="validation-message">
+            {{message}}
+        </div>
     </div>
-</div>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
-    <div *ngFor="let unit of force.units; let i = index" style="position: relative;">
-        <app-unit-sheet [unit]="force.units[i]" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
+    <!-- Unit Sheets -->
+    <div class="roster-units">
+        <div *ngFor="let unit of force.units; let i = index" class="unit-sheet-container">
+            <app-unit-sheet [unit]="force.units[i]" [printMode]="printMode" (unitChanged)="onUnitChanged($event, i)" (deleteUnit)="removeUnitSheet(i)"></app-unit-sheet>
+        </div>
     </div>
-</div>
-<br>
-<button (click)="addUnitSheet()">Add Unit Sheet</button>
 
-<div class="saved-forces" *ngIf="savedForces.length > 0">
-    <h3>Saved Forces</h3>
-    <div class="saved-forces-list">
-        <div *ngFor="let savedForce of savedForces" class="saved-force">
-            <div class="saved-force-info">
-                <span class="saved-force-name">{{ savedForce.force.name }}</span>
-                <span class="saved-force-date">{{ savedForce.date | date:'medium' }}</span>
-                <span class="saved-force-cost">Cost: {{ getTotalCost(savedForce.force) }} points</span>
-            </div>
-            <div class="saved-force-actions">
-                <button (click)="loadForce(savedForce.force)">Load</button>
-                <button (click)="deleteSavedForce(savedForce.key)">Delete</button>
+    <br>
+    <!-- Add Unit Button -->
+    <div class="roster-actions">
+        <button (click)="addUnitSheet()">Add Unit Sheet</button>
+    </div>
+
+    <!-- Saved Forces -->
+    <div class="saved-forces" *ngIf="savedForces.length > 0">
+        <h3>Saved Forces</h3>
+        <div class="saved-forces-list">
+            <div *ngFor="let savedForce of savedForces" class="saved-force">
+                <div class="saved-force-info">
+                    <span class="saved-force-name">{{ savedForce.force.name }}</span>
+                    <span class="saved-force-date">{{ savedForce.date | date:'medium' }}</span>
+                    <span class="saved-force-cost">Cost: {{ getTotalCost(savedForce.force) }} points</span>
+                </div>
+                <div class="saved-force-actions">
+                    <button (click)="loadForce(savedForce.force)">Load</button>
+                    <button (click)="deleteSavedForce(savedForce.key)">Delete</button>
+                </div>
             </div>
         </div>
     </div>

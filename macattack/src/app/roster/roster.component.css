@@ -87,3 +87,73 @@
     display: flex;
     gap: 0.5em;
 }
+
+/* Print styles */
+@media print {
+    /* Hide everything except the print layout */
+    body > *:not(.print-only) {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    /* Hide all buttons and interactive elements */
+    button, input, select {
+        display: none !important;
+    }
+
+    /* Hide the saved forces section */
+    .saved-forces {
+        display: none !important;
+    }
+
+    .roster-header {
+        display: none !important;
+    }
+
+    .validation-messages {
+        display: none !important;
+    }
+
+    /* A4 landscape layout */
+    @page {
+        size: A4 landscape;
+        margin: 1cm;
+    }
+
+    .print-header {
+        text-align: center;
+        margin-bottom: 2em;
+    }
+
+    .print-header h1 {
+        font-size: 24pt;
+        margin: 0;
+    }
+
+    .print-units {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1cm;
+    }
+
+    /* Ensure unit sheets fit on the page */
+    app-unit-sheet {
+        page-break-inside: avoid;
+    }
+
+    /* Remove any background colors and borders that might interfere with printing */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+.roster-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 0.9em;
+}

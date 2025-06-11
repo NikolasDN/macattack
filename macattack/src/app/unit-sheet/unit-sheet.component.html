@@ -3,9 +3,11 @@
         <td class="s0" dir="ltr" colspan="2" style="text-align: right; width: 100px;"><b>UNIT</b></td>
         <td class="s1" dir="ltr" colspan="2" style="width: 400px;">
             <div style="display: flex; align-items: center; gap: 8px;">
-                <input type="text" class="unit-name" [(ngModel)]="unit.name" (ngModelChange)="unitChanged.emit(unit)" style="flex: 1; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
-                <input *ngIf="!isMAC(unit)" type="number" [(ngModel)]="unit.formationSize" (ngModelChange)="unitChanged.emit(unit)" min="1" style="width: 60px; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
-                <button (click)="deleteUnit.emit()" style="background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0 4px;" title="Delete Unit">🗑️</button>
+                <input *ngIf="!printMode" type="text" class="unit-name" [(ngModel)]="unit.name" (ngModelChange)="unitChanged.emit(unit)" style="flex: 1; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
+                <span *ngIf="printMode" style="flex: 1; text-align: center; font-weight: bold;">{{unit.name}}</span>
+                <input *ngIf="!isMAC(unit) && !printMode" type="number" [(ngModel)]="unit.formationSize" (ngModelChange)="unitChanged.emit(unit)" min="1" style="width: 60px; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
+                <span *ngIf="!isMAC(unit) && printMode" style="width: 60px; text-align: center;">{{unit.formationSize}}</span>
+                <button *ngIf="!printMode" (click)="deleteUnit.emit()" style="background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0 4px;" title="Delete Unit">🗑️</button>
             </div>
         </td>
     </tr>
@@ -13,8 +15,8 @@
         <td class="s0" dir="ltr" colspan="2" style="text-align: right; width: 100px;"><b>COST</b></td>
         <td class="s1" dir="ltr" style="width: 50px;">{{this.getCost(unit)}}</td>
         <td class="s2" rowspan="7" style="width: 300px;">
-            <input #fileInput type="file" accept="image/png" style="display: none;" (change)="onImageSelected($event)" />
-            <img [src]="'data:image/png;base64,' + unit.image" style="width: 100%; height: 100%; object-fit: contain;" (click)="fileInput.click()" />
+            <input *ngIf="!printMode" #fileInput type="file" accept="image/png" style="display: none;" (change)="onImageSelected($event)" />
+            <img [src]="'data:image/png;base64,' + unit.image" (click)="triggerFileInput()" style="width: 100%; height: 100%; object-fit: contain;" [style.cursor]="printMode ? 'default' : 'pointer'" />
         </td>
     </tr>
     <tr style="height: 24px">
@@ -23,27 +25,27 @@
     </tr>
     <tr style="height: 24px">
         <td class="s1" style="width: 50px;"></td>
-        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 1)" (click)="selectUnitType('Class 1 MAC')" style="cursor: pointer; user-select: none; width: 150px;">Class 1 MAC</td>
+        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 1)" (click)="!printMode && selectUnitType('Class 1 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 1 MAC</td>
         <td class="s1" style="width: 50px;"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s3" style="width: 50px;"></td>
-        <td class="s4" dir="ltr" [class.selected]="isClass(unit, 2)" (click)="selectUnitType('Class 2 MAC')" style="cursor: pointer; user-select: none; width: 150px;">Class 2 MAC</td>
+        <td class="s4" dir="ltr" [class.selected]="isClass(unit, 2)" (click)="!printMode && selectUnitType('Class 2 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 2 MAC</td>
         <td class="s1" style="width: 50px;"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1" style="width: 50px;"></td>
-        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 3)" (click)="selectUnitType('Class 3 MAC')" style="cursor: pointer; user-select: none; width: 150px;">Class 3 MAC</td>
+        <td class="s2" dir="ltr" [class.selected]="isClass(unit, 3)" (click)="!printMode && selectUnitType('Class 3 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 3 MAC</td>
         <td class="s1" style="width: 50px;"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1" style="width: 50px;"></td>
-        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'infantry')" (click)="selectUnitType('Infantry AU')" style="cursor: pointer; user-select: none; width: 150px;">Infantry AU</td>
+        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'infantry')" (click)="!printMode && selectUnitType('Infantry AU')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Infantry AU</td>
         <td class="s5" class="selected" style="width: 50px;"></td>
     </tr>
     <tr style="height: 24px">
         <td class="s1" style="width: 50px;"></td>
-        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'vehicle')" (click)="selectUnitType('Vehicle AU')" style="cursor: pointer; user-select: none; width: 150px;">Vehicle AU</td>
+        <td class="s2" dir="ltr" [class.selected]="isAuxiliaryType(unit, 'vehicle')" (click)="!printMode && selectUnitType('Vehicle AU')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Vehicle AU</td>
         <td class="s5" class="selected" style="width: 50px;"></td>
     </tr>
     <tr style="height: 24px">
@@ -55,12 +57,13 @@
     <tr style="height: 24px" *ngFor="let i of [0,1,2,3,4,5]">
         <td class="s1" dir="ltr" style="width: 50px;">{{i + 1}}</td>
         <td class="s1" dir="ltr" style="width: 150px;">
-            <select [(ngModel)]="unit.modules[i]" (ngModelChange)="unitChanged.emit(unit)" style="width: 100%; height: 100%; border: none; text-align: left;">
+            <select *ngIf="!printMode" [(ngModel)]="unit.modules[i]" (ngModelChange)="unitChanged.emit(unit)" style="width: 100%; height: 100%; border: none; text-align: left;">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let module of getAvailableModules(unit, i + 1)" [ngValue]="module">
                     {{getModuleName(module)}}
                 </option>
             </select>
+            <span *ngIf="printMode" style="display: block; text-align: left; padding: 0 4px;">{{getModuleName(unit.modules[i])}}</span>
         </td>
         <td class="s1" style="width: 50px;"></td>
         <td class="s1" dir="ltr" style="width: 300px;">{{getModuleEffect(unit.modules[i])}}</td>
