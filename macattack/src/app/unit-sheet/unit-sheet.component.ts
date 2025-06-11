@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Module } from '../interfaces/module';
@@ -16,10 +16,12 @@ import { UtilsService } from '../services/utils.service';
   styleUrl: './unit-sheet.component.css'
 })
 export class UnitSheetComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   @Input() unit: MAC | AuxiliaryUnit = {
     name: "(your unit name)",
     class: 1,
-    modules: []
+    modules: [],
+    image: "iVBORw0KGgoAAAANSUhEUgAAAY8AAADZCAYAAADYOry5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7P1nkKxZet+J/Y55XfrMsrdu1fWmvZnp6ZnBzGAwGJAgaHdFtxQlbMRKsRHcpUCAwdhvkjpCEVLow37Y2O9iiFiaJQktJGIXIEASwHjXZrqnu2/fvt6Ur0qf+Zpj9OFk3e4ZDBDAGAgc3X/Ee29VVlZVVr7nnMf9n/8j/tLffMqzgPce7x99+ieGEAIhxPc+/BiP8RiP8SOERwiJcw48KC3xHry3gEBIiUDgvMd7F55rHVLKR9//vT/vEeTiU+/xHgT+0bnmvUIgcVR479EqxqOoTIkXjun2kChxFC6mtZSgdQReIUWBMxKvTn7/TwbEL/79Fx8bj8d4jMf4jwbOBUPgXDirlJKLs8rivMNah1IKIWQwJkJg7cKwCDg5ob7fWSWkxAPSg8c9Og8FgFfhf1HhvQOvQGistxhXEh16uqsZDw5KaksC"
   };
   @Output() unitChanged = new EventEmitter<MAC | AuxiliaryUnit>();
   @Output() deleteUnit = new EventEmitter<void>();
@@ -48,7 +50,8 @@ export class UnitSheetComponent {
       this.unit = {
         name: this.unit.name,
         class: classNum as MACClass,
-        modules: []
+        modules: [],
+        image: "iVBORw0KGgoAAAANSUhEUgAAAY8AAADZCAYAAADYOry5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7P1nkKxZet+J/Y55XfrMsrdu1fWmvZnp6ZnBzGAwGJAgaHdFtxQlbMRKsRHcpUCAwdhvkjpCEVLow37Y2O9iiFiaJQktJGIXIEASwHjXZrqnu2/fvt6Ur0qf+Zpj9OFk3e4ZDBDAGAgc3X/Ee29VVlZVVr7nnMf9n/8j/tLffMqzgPce7x99+ieGEAIhxPc+/BiP8RiP8SOERwiJcw48KC3xHry3gEBIiUDgvMd7F55rHVLKR9//vT/vEeTiU+/xHgT+0bnmvUIgcVR479EqxqOoTIkXjun2kChxFC6mtZSgdQReIUWBMxKvTn7/TwbEL/79Fx8bj8d4jMf4jwbOBUPgXDirlJKLs8rivMNah1IKIWQwJkJg7cKwCDg5ob7fWSWkxAPSg8c9Og8FgFfhf1HhvQOvQGistxhXEh16uqsZDw5KaksC"
       };
     } else if (type.includes('AU')) {
       const unitType = type.toLowerCase().includes('infantry') ? 'infantry' : 'vehicle';
@@ -56,7 +59,8 @@ export class UnitSheetComponent {
         name: this.unit.name,
         type: unitType,
         formationSize: 1,
-        modules: []
+        modules: [],
+        image: "iVBORw0KGgoAAAANSUhEUgAAAY8AAADZCAYAAADYOry5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAP+lSURBVHhe7P1nkKxZet+J/Y55XfrMsrdu1fWmvZnp6ZnBzGAwGJAgaHdFtxQlbMRKsRHcpUCAwdhvkjpCEVLow37Y2O9iiFiaJQktJGIXIEASwHjXZrqnu2/fvt6Ur0qf+Zpj9OFk3e4ZDBDAGAgc3X/Ee29VVlZVVr7nnMf9n/8j/tLffMqzgPce7x99+ieGEAIhxPc+/BiP8RiP8SOERwiJcw48KC3xHry3gEBIiUDgvMd7F55rHVLKR9//vT/vEeTiU+/xHgT+0bnmvUIgcVR479EqxqOoTIkXjun2kChxFC6mtZSgdQReIUWBMxKvTn7/TwbEL/79Fx8bj8d4jMf4jwbOBUPgXDirlJKLs8rivMNah1IKIWQwJkJg7cKwCDg5ob7fWSWkxAPSg8c9Og8FgFfhf1HhvQOvQGistxhXEh16uqsZDw5KaksC"
       };
     }
     this.unitChanged.emit(this.unit);
@@ -117,6 +121,41 @@ export class UnitSheetComponent {
         status: 'intact'
       };
       this.unitChanged.emit(this.unit);
+    }
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target?.result) {
+          // Create a temporary image to get dimensions
+          const img = new Image();
+          img.onload = () => {
+            // Create a canvas to resize the image
+            const canvas = document.createElement('canvas');
+            canvas.width = 399;
+            canvas.height = 217;
+            const ctx = canvas.getContext('2d');
+            
+            if (ctx) {
+              // Draw the image scaled to fit
+              ctx.drawImage(img, 0, 0, 399, 217);
+              
+              // Convert to base64
+              const base64 = canvas.toDataURL('image/png').split(',')[1];
+              this.unit.image = base64;
+              this.unitChanged.emit(this.unit);
+            }
+          };
+          img.src = e.target.result as string;
+        }
+      };
+      
+      reader.readAsDataURL(file);
     }
   }
 }

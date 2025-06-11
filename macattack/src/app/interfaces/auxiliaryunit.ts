@@ -4,4 +4,5 @@ export interface AuxiliaryUnit {
     type: "infantry" | "vehicle";
     formationSize: number;
     modules: Module[];
+    image: string;
   }

@@ -4,6 +4,7 @@ export interface MAC {
     name: string;
     class: MACClass;
     modules: Module[];
+    image: string;
   }
 
   // Enum for MAC class types
