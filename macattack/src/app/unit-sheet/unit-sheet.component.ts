@@ -96,8 +96,11 @@ export class UnitSheetComponent {
 
   getModuleName(module: Module | null): string {
     if (!module) return '';
-    if (module.type === 'weapon' && module.weapon) {
+    if (module.type === 'weapon' && module.weapon && module.weapon.subtype) {
       return `${module.weapon.range || ''}${module.weapon.type}${module.weapon.power}-${module.weapon.subtype || ''} ${module.weapon.name}`;
+    }
+    if (module.type === 'weapon' && module.weapon) {
+      return `${module.weapon.range || ''}${module.weapon.type}${module.weapon.power} ${module.weapon.name}`;
     }
     return module.hardware?.name || '';
   }

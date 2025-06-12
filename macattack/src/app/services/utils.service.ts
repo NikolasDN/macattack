@@ -121,7 +121,7 @@ export class UtilsService {
     if (signature == "SG1") return "SmartGun";
     if (signature == "SM1") return "FlakRepeater";
     if (signature == "LP1") return "LaserRifle";
-    if (signature == "LB1") return "AutoCannon";
+    if (signature == "LB1") return "Cannon";
     if (signature == "LG1") return "SmartCannon";
     if (signature == "LM1") return "MultiCannon";
     if (signature == "AP1") return "ArcRifle";
