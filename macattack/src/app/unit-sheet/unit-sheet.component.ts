@@ -45,6 +45,10 @@ export class UnitSheetComponent {
     return this.utils.getCost(unit);
   }
 
+  selectText(event: MouseEvent) {
+    (event.target as HTMLInputElement).select();
+  }
+
   selectUnitType(type: string) {
     if (type.includes('MAC')) {
       const classNum = parseInt(type.split(' ')[1]);

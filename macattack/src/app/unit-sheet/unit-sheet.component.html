@@ -5,7 +5,7 @@
             <div style="display: flex; align-items: center; gap: 8px;">
                 <input *ngIf="!isMAC(unit) && !printMode" type="number" [(ngModel)]="unit.formationSize" (ngModelChange)="unitChanged.emit(unit)" min="1" style="width: 60px; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
                 <span *ngIf="!isMAC(unit) && printMode" style="width: 60px; text-align: center;">{{unit.formationSize}}</span>
-                <input *ngIf="!printMode" type="text" class="unit-name" [(ngModel)]="unit.name" (ngModelChange)="unitChanged.emit(unit)" style="flex: 1; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
+                <input *ngIf="!printMode" type="text" class="unit-name" [(ngModel)]="unit.name" (click)="selectText($event)" (ngModelChange)="unitChanged.emit(unit)" style="flex: 1; height: 100%; box-sizing: border-box; border: none; text-align: center;" />
                 <span *ngIf="printMode" style="flex: 1; text-align: center; font-weight: bold;">{{unit.name}}</span>
                 <button *ngIf="!printMode" (click)="deleteUnit.emit()" style="background: none; border: none; cursor: pointer; font-size: 1.2em; padding: 0 4px;" title="Delete Unit">🗑️</button>
             </div>

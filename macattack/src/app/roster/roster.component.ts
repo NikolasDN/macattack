@@ -24,7 +24,7 @@ interface SavedForce {
 })
 export class RosterComponent implements OnInit {
   force: Force = {
-    name: "MAC Attack",
+    name: "(your force name)",
     pointsLimit: 50,
     units: []
   };
@@ -36,6 +36,10 @@ export class RosterComponent implements OnInit {
 
   ngOnInit() {
     this.loadSavedForces();
+  }
+
+  selectText(event: MouseEvent) {
+    (event.target as HTMLInputElement).select();
   }
 
   addUnitSheet() {
