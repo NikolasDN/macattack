@@ -8,3 +8,11 @@ td[style*="cursor: pointer"]:hover {
 }
 
 img { cursor: pointer; }
+
+.hitbox-active {
+    background-color: white !important;
+}
+
+.hitbox-inactive {
+    background-color: #e0e0e0 !important;
+}

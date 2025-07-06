@@ -41,6 +41,16 @@ export class UnitSheetComponent {
     return !this.isMAC(unit) && unit.type === type;
   }
 
+  isHitboxActive(unit: MAC | AuxiliaryUnit, hitboxIndex: number): boolean {
+    if (this.isMAC(unit)) {
+      // For MACs, only show hitboxes up to the class number
+      return hitboxIndex < unit.class;
+    } else {
+      // For auxiliary units, show all hitboxes (they have their own styling)
+      return true;
+    }
+  }
+
   getCost(unit: MAC | AuxiliaryUnit): number {
     return this.utils.getCost(unit);
   }

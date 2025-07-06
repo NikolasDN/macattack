@@ -26,17 +26,17 @@
     <tr style="height: 20px">
         <td class="s1" style="width: 50px;"></td>
         <td class="s2" dir="ltr" [class.selected]="isClass(unit, 1)" (click)="!printMode && selectUnitType('Class 1 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 1 MAC</td>
-        <td class="s1" style="width: 50px;"></td>
+        <td class="s1" [class.hitbox-active]="isHitboxActive(unit, 0)" [class.hitbox-inactive]="!isHitboxActive(unit, 0)" style="width: 50px;"></td>
     </tr>
     <tr style="height: 20px">
         <td class="s3" style="width: 50px;"></td>
         <td class="s4" dir="ltr" [class.selected]="isClass(unit, 2)" (click)="!printMode && selectUnitType('Class 2 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 2 MAC</td>
-        <td class="s1" style="width: 50px;"></td>
+        <td class="s1" [class.hitbox-active]="isHitboxActive(unit, 1)" [class.hitbox-inactive]="!isHitboxActive(unit, 1)" style="width: 50px;"></td>
     </tr>
     <tr style="height: 20px">
         <td class="s1" style="width: 50px;"></td>
         <td class="s2" dir="ltr" [class.selected]="isClass(unit, 3)" (click)="!printMode && selectUnitType('Class 3 MAC')" [style.cursor]="printMode ? 'default' : 'pointer'" style="user-select: none; width: 150px;">Class 3 MAC</td>
-        <td class="s1" style="width: 50px;"></td>
+        <td class="s1" [class.hitbox-active]="isHitboxActive(unit, 2)" [class.hitbox-inactive]="!isHitboxActive(unit, 2)" style="width: 50px;"></td>
     </tr>
     <tr style="height: 20px">
         <td class="s1" style="width: 50px;"></td>
