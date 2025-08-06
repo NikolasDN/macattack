@@ -1,10 +1,12 @@
-import { Module } from "./module";
+import { Module, ModuleOrNull } from "./module";
 
 export interface MAC {
     name: string;
     class: MACClass;
-    modules: Module[];
+    modules: ModuleOrNull[];
     image: string;
+    imageWidth?: number;
+    imageHeight?: number;
   }
 
   // Enum for MAC class types

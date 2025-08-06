@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MAC } from '../interfaces/mac';
 import { AuxiliaryUnit } from '../interfaces/auxiliaryunit';
-import { Module } from '../interfaces/module';
+import { Module, ModuleOrNull } from '../interfaces/module';
 import { range } from 'rxjs';
 
 @Injectable({
@@ -595,17 +595,17 @@ export class UtilsService {
           break;
       }
       // Count Frame modules and reduce cost
-      const frameCount = unit.modules.filter((m: Module) => 
-        m.type === 'hardware' && m.hardware?.name === 'Frame'
+      const frameCount = unit.modules.filter((m: ModuleOrNull) => 
+        m && m.type === 'hardware' && m.hardware?.name === 'Frame'
       ).length;
       return baseCost - frameCount;
     } else {
       let cost = 1; // Base cost of 1 for auxiliary units
       // Add cost for each module
-      unit.modules.forEach((module: Module) => {
-        if (module.type === "weapon" && module.weapon) {
+      unit.modules.forEach((module: ModuleOrNull) => {
+        if (module && module.type === "weapon" && module.weapon) {
           cost += module.weapon.power;
-        } else if (module.type === "hardware") {
+        } else if (module && module.type === "hardware") {
           cost += 1;
         }
       });

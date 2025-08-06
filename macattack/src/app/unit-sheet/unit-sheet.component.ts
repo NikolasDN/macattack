@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Module } from '../interfaces/module';
+import { Module, ModuleOrNull } from '../interfaces/module';
 import { Weapon } from '../interfaces/weapon';
 import { Hardware } from '../interfaces/hardware';
 import { MAC, MACClass } from '../interfaces/mac';
@@ -62,23 +62,34 @@ export class UnitSheetComponent {
   selectUnitType(type: string) {
     if (type.includes('MAC')) {
       const classNum = parseInt(type.split(' ')[1]);
-      this.unit = {
-        name: this.unit.name,
-        class: classNum as MACClass,
-        modules: [],
-        image: this.unit.image
-      };
+      // Only reset modules if the class is actually changing
+      if (!this.isMAC(this.unit) || this.unit.class !== classNum) {
+        this.unit = {
+          name: this.unit.name,
+          class: classNum as MACClass,
+          modules: [],
+          image: this.unit.image,
+          imageWidth: this.unit.imageWidth,
+          imageHeight: this.unit.imageHeight
+        };
+        this.unitChanged.emit(this.unit);
+      }
     } else if (type.includes('AU')) {
       const unitType = type.toLowerCase().includes('infantry') ? 'infantry' : 'vehicle';
-      this.unit = {
-        name: this.unit.name,
-        type: unitType,
-        formationSize: 1,
-        modules: [],
-        image: this.unit.image
-      };
+      // Only reset modules if the type is actually changing
+      if (this.isMAC(this.unit) || this.unit.type !== unitType) {
+        this.unit = {
+          name: this.unit.name,
+          type: unitType,
+          formationSize: 1,
+          modules: [],
+          image: this.unit.image,
+          imageWidth: this.unit.imageWidth,
+          imageHeight: this.unit.imageHeight
+        };
+        this.unitChanged.emit(this.unit);
+      }
     }
-    this.unitChanged.emit(this.unit);
   }
 
   getAvailableModules(unit: MAC | AuxiliaryUnit, slot: number): Module[] {
@@ -158,6 +169,10 @@ export class UnitSheetComponent {
           // Create a temporary image to get dimensions
           const img = new Image();
           img.onload = () => {
+            // Store the original image dimensions
+            this.unit.imageWidth = img.naturalWidth;
+            this.unit.imageHeight = img.naturalHeight;
+            
             // Create a canvas to resize the image
             const canvas = document.createElement('canvas');
             canvas.width = 399;
@@ -168,9 +183,22 @@ export class UnitSheetComponent {
               // Draw the image scaled to fit
               ctx.drawImage(img, 0, 0, 399, 217);
               
-              // Convert to base64
-              const base64 = canvas.toDataURL('image/png').split(',')[1];
-              this.unit.image = base64;
+              // Determine the output format based on the input file type
+              let outputFormat = 'image/png';
+              let quality = 0.9;
+              
+              if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                outputFormat = 'image/jpeg';
+              }
+              
+              // Convert to base64 with appropriate format
+              const dataUrl = canvas.toDataURL(outputFormat, quality);
+              const base64 = dataUrl.split(',')[1];
+              
+              // Store the format information in the image data
+              // We'll prefix the base64 data with the format type
+              const formatPrefix = outputFormat === 'image/jpeg' ? 'jpeg:' : 'png:';
+              this.unit.image = formatPrefix + base64;
               this.unitChanged.emit(this.unit);
             }
           };
@@ -186,5 +214,49 @@ export class UnitSheetComponent {
     if (!this.printMode) {
       this.fileInput.nativeElement.click();
     }
+  }
+
+  getImageSrc(imageData: string): string {
+    // Handle empty or null image data
+    if (!imageData || imageData === '') {
+      return '';
+    }
+    
+    // Check if the image data has a format prefix
+    if (imageData.startsWith('jpeg:')) {
+      return 'data:image/jpeg;base64,' + imageData.substring(5);
+    } else if (imageData.startsWith('png:')) {
+      return 'data:image/png;base64,' + imageData.substring(4);
+    } else {
+      // For backward compatibility, assume PNG format for existing data
+      return 'data:image/png;base64,' + imageData;
+    }
+  }
+
+  getImageStyle(): string {
+    if (!this.unit.imageWidth || !this.unit.imageHeight) {
+      // Fallback to default styling if dimensions are not available
+      return 'object-fit: contain; display: block; margin: auto; max-width: 100%; max-height: 132px; border: 1px solid #ddd; background-color: #f9f9f9;';
+    }
+
+    // Calculate the aspect ratio
+    const aspectRatio = this.unit.imageWidth / this.unit.imageHeight;
+    const containerWidth = 292; // 300px - 8px padding
+    const containerHeight = 132;
+
+    // Calculate the scaled dimensions that fit within the container
+    let scaledWidth, scaledHeight;
+    
+    if (aspectRatio > containerWidth / containerHeight) {
+      // Image is wider than container aspect ratio - fit to width
+      scaledWidth = containerWidth;
+      scaledHeight = containerWidth / aspectRatio;
+    } else {
+      // Image is taller than container aspect ratio - fit to height
+      scaledHeight = containerHeight;
+      scaledWidth = containerHeight * aspectRatio;
+    }
+
+    return `width: ${scaledWidth}px; height: ${scaledHeight}px; display: block; margin: auto; border: 1px solid #ddd; background-color: #f9f9f9;`;
   }
 }

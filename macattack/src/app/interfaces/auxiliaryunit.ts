@@ -1,8 +1,10 @@
-import { Module } from "./module";
+import { Module, ModuleOrNull } from "./module";
 export interface AuxiliaryUnit {
     name: string;
     type: "infantry" | "vehicle";
     formationSize: number;
-    modules: Module[];
+    modules: ModuleOrNull[];
     image: string;
+    imageWidth?: number;
+    imageHeight?: number;
   }
